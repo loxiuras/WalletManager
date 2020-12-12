@@ -1,0 +1,5 @@
+Header set X-Frame-Options SAMEORIGIN
+
+RewriteEngine On
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule .* index.php
