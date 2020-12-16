@@ -97,4 +97,20 @@ class Globals
     {
         return $this->getIniContent( 'environments', 'environment.active' );
     }
+
+    /**
+     * @return bool
+     */
+    public function getForceWww(): bool
+    {
+        return !empty( $this->getIniContent( $this->getActiveEnvironment(), 'system.forceWww' ) );
+    }
+
+    /**
+     * @return string
+     */
+    public function getPrefix(): string
+    {
+        return $this->getIniContent( $this->getActiveEnvironment(), 'system.prefix' );
+    }
 }
