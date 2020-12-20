@@ -3,6 +3,12 @@
 const servicesName = "Service";
 const servicesPath = "mvc/application/services/";
 
+const controllerName      = "Controller";
+const frontControllerName = "Front";
+
+const controllerPath      = "mvc/application/modules/";
+const frontControllerPath = "mvc/application/modules/front/";
+
 spl_autoload_register(function ( $className ) {
 
     $classPieces = preg_split('/(?=[A-Z])/',$className);
@@ -20,6 +26,18 @@ spl_autoload_register(function ( $className ) {
     switch ( $lastPiece ) {
         case servicesName:
             $requirePath = servicesPath . str_replace( servicesName, '', $className ) . ".php";
+            break;
+
+        case controllerName:
+
+            switch ( $firstPiece ) {
+
+                default:
+                    $requirePath = frontControllerPath . $className . ".php";
+                    break;
+
+            }
+
             break;
 
         default: break;
