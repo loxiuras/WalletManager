@@ -1,6 +1,9 @@
 <?php
 
-class Globals
+/**
+ * Class ConfigGlobals
+ */
+class ConfigGlobals
 {
 
     /** @var string */

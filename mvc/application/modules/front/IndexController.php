@@ -89,7 +89,7 @@ class IndexController
      */
     private function isControllerValid( string $controller ): bool
     {
-
+        $ModelSystemModules = new ModelSystemModules();
 
         return true;
     }

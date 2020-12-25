@@ -1,9 +1,8 @@
 <?php
 
 require_once "autoload.php";
-require_once "mvc/application/configs/Globals.php";
 
-$Globals = new Globals();
+$Globals = new ConfigGlobals();
 
 if ( $Globals->getActiveEnvironment() !== $Globals::getEnvironmentProduction() ) {
     (new RedirectService())->validateBrowserRedirects();
