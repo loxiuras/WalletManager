@@ -12,9 +12,6 @@ class ModelDefault
     /** @var string */
     private $primaryKey = '';
 
-    /** @var mixed */
-    private $connection;
-
     /**
      * @return string
      */
@@ -48,27 +45,11 @@ class ModelDefault
     }
 
     /**
-     * @return mixed
-     */
-    public function getConnection()
-    {
-        return $this->connection;
-    }
-
-    /**
-     * @param mixed $connection
-     */
-    public function setConnection($connection): void
-    {
-        $this->connection = $connection;
-    }
-
-    /**
      * ModelDefault constructor.
      */
     public function __construct()
     {
-        $this->setConnection( (new ConfigDatabase()) );
+
     }
 
 }

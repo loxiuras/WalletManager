@@ -116,4 +116,14 @@ class ConfigGlobals
     {
         return $this->getIniContent( $this->getActiveEnvironment(), 'system.prefix' );
     }
+
+    /**
+     * @param string $setting
+     * @return string
+     */
+    public function getDatabaseSetting( string $setting ): string
+    {
+        $value = $this->getIniContent( $this->getActiveEnvironment(), 'database.'. $setting );
+        return !empty($value) ? $value : "";
+    }
 }

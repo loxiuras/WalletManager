@@ -1,7 +1,8 @@
 <?php
 
-const configName = 'Config';
-const configPath = 'mvc/application/configs';
+const configName         = 'Config';
+const configDatabaseName = 'Database';
+const configPath         = 'mvc/application/configs';
 
 const servicesName = "Service";
 const servicesPath = "mvc/application/services/";
@@ -30,7 +31,20 @@ spl_autoload_register(function ( $className ) {
 
             $fileClassName = array_shift( $classPieces );
 
-            $requirePath = configPath . "/" . $fileClassName . ".php";
+            switch ( $fileClassName ) {
+
+                case configDatabaseName:
+
+                    $fileClassName = array_shift( $classPieces );
+
+                    $requirePath = configPath . "/" . strtolower(configDatabaseName) . "/" . $fileClassName . ".php";
+
+                    break;
+
+                default:
+                    $requirePath = configPath . "/" . $fileClassName . ".php";
+                    break;
+            }
 
             break;
 

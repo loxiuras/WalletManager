@@ -10,6 +10,8 @@ if ( $Globals->getActiveEnvironment() !== $Globals::getEnvironmentProduction() )
 
 try {
 
+    $connection = ( new ConfigDatabaseConnection() );
+
     (new IndexController())->dispatch();
 
 }
