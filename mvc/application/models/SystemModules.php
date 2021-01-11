@@ -7,10 +7,10 @@ class ModelSystemModules extends ModelDefault
 {
 
     /** @var string */
-    private static $modelName = '';
+    private static $modelName = 'module';
 
     /** @var string */
-    private static $modelPrimaryKey = '';
+    private static $modelPrimaryKey = 'moduleId';
 
     /**
      * @return string

@@ -61,17 +61,33 @@ class IndexController
     }
 
     /**
+     * @return array
+     */
+    private function getUrlKeys(): array
+    {
+        return $urlKeys = explode( '/', $_SERVER['REQUEST_URI'] );
+    }
+
+    /**
      * @return void
      */
     private function validateDirectoryAndController(): void
     {
-        $urlKeys = explode( '/', $_SERVER['REQUEST_URI'] );
+        $urlKeys = $this->getUrlKeys();
 
         $urlDirectory  = !empty($urlKeys[1]) ? (string)$urlKeys[1] : null;
         $urlController = !empty($urlKeys[2]) ? (string)$urlKeys[2] : null;
 
         if ( !empty($urlDirectory) && $this->isDirectoryValid( $urlDirectory ) ) $this->setDirectory( $urlDirectory );
         if ( !empty($urlController) && $this->isControllerValid( $urlController ) ) $this->setController( $urlController );
+
+        if ( empty( $this->getDirectory() ) || empty( $this->getController() ) ) {
+            global $Globals;
+
+            header('HTTP/1.1 500 Internal Server Error');
+            header('Location: '. $Globals->getPrefix() . $_SERVER['HTTP_HOST'] ."/system/404");
+            exit;
+        }
     }
 
     /**
@@ -91,7 +107,15 @@ class IndexController
     {
         $ModelSystemModules = new ModelSystemModules();
 
-        return true;
+        $fields  = ["moduleId", "controller"];
+        $where   = [];
+        $where[] = "directory = '{$this->getDirectory()}'";
+        $where[] = "controller = '{$controller}'";
+        $where[] = "active = 1";
+        $orderBy = ["moduleId"];
+        $controllerData = $ModelSystemModules->getRecord( $fields, $where, $orderBy );
+
+        return !empty( $controllerData ) && !empty( $controllerData->moduleId );
     }
 
     /**

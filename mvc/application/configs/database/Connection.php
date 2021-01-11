@@ -6,7 +6,7 @@
 class ConfigDatabaseConnection
 {
     /** @var mixed */
-    protected $PDO;
+    private $PDO;
 
     /**
      * @return mixed
@@ -19,7 +19,7 @@ class ConfigDatabaseConnection
     /**
      * @param mixed $PDO
      */
-    public function setPDO($PDO): void
+    private function setPDO($PDO): void
     {
         $this->PDO = $PDO;
     }
