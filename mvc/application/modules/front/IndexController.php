@@ -123,7 +123,13 @@ class IndexController
      */
     public function dispatch(): void
     {
+        $className = ucfirst( $this->getDirectory() ) . ucfirst( $this->getController() ) . "Controller";
+        $class = new $className();
 
+        $urlKeys = $this->getUrlKeys();
+        $action = !empty($urlKeys[3]) ? (string)$urlKeys[3] : 'index';
+        $actionName = "{$action}Action";
+        echo $class->$actionName();
     }
 
 }

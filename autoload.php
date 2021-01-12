@@ -7,11 +7,13 @@ const configPath         = 'mvc/application/configs';
 const servicesName = "Service";
 const servicesPath = "mvc/application/services/";
 
-const controllerName      = "Controller";
-const frontControllerName = "Front";
+const controllerName       = "Controller";
+const frontControllerName  = "Front";
+const systemControllerName = "System";
 
-const controllerPath      = "mvc/application/modules/";
-const frontControllerPath = "mvc/application/modules/front/";
+const controllerPath       = "mvc/application/modules";
+const frontControllerPath  = controllerPath . "/front/";
+const systemControllerPath = controllerPath . "/system/";
 
 const modelName = 'Model';
 const modelPath = 'mvc/application/models/';
@@ -70,7 +72,20 @@ spl_autoload_register(function ( $className ) {
 
             switch ( $firstPiece ) {
 
+                case systemControllerName:
+
+                    $fileName = str_replace( $firstPiece, "", $className );
+                    $requirePath = systemControllerPath . lcfirst( $fileName ) . ".php";
+
+                break;
+
                 case frontControllerName:
+
+                    $fileName = str_replace( $firstPiece, "", $className );
+                    $requirePath = frontControllerPath . lcfirst( $fileName ) . ".php";
+
+                    break;
+
                 default:
                     $requirePath = frontControllerPath . $className . ".php";
                     break;
